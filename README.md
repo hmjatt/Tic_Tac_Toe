@@ -15,7 +15,10 @@ It was created to get better at Factory Functions and Module Pattern. Keep on re
 
 
 
-    People think that computer science is the art of geniuses but the actual reality is the opposite, just many people doing things that build on eachother, like a wall of mini stones.
+    People think that computer science is the art of geniuses 
+    but the actual reality is the opposite, 
+    just many people doing things that build on eachother, 
+    like a wall of mini stones.
 
     Donald Knuth
 >  	
