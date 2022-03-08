@@ -4,7 +4,7 @@ It was created to get better at Factory Functions and Module Pattern. Keep on re
 
 
 
-[Live Demo](https://hmjatt.github.io/Library/)
+[Live Demo](https://hmjatt.github.io/Tic_Tac_Toe/)
 
 
 
