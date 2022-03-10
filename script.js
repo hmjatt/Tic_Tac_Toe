@@ -111,14 +111,20 @@ const validateResults = (() => {
         [2, 4, 6]
     ];
 
-    //determines if any player won (WIP)
+    const currentPlayerTurn = () => {
+        `It's ${currentPlayer}'s turn`;
+    };
+
+    /*
+    We store our game status element here to allow us to more easily 
+    use it later on 
+    */
+    const statusDisplay = document.querySelector('.game-status');
+
+    //determines if any player won (Works)
     const validate = () => {
         let roundWon = false;
-        /*
-        We store our game status element here to allow us to more easily 
-        use it later on 
-        */
-        const statusDisplay = document.querySelector('.game-status');
+        
         
         /*
         Here we have declared some messages we will display to the user during the game.
@@ -128,7 +134,7 @@ const validateResults = (() => {
         */
         const winningMessage = () => `Player ${currentPlayer} has won!`;
         const drawMessage = () => `Game ended in a draw!`;
-        // const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
+        
       
         // it works
         for (let i = 0; i <= 7; i++) {
@@ -141,6 +147,7 @@ const validateResults = (() => {
             }
             if (a === b && b === c) {
                 roundWon = true;
+                console.log("won");
                 break
             }
         }
@@ -159,30 +166,35 @@ const validateResults = (() => {
         // (it works)
         let roundDraw = Object.values(!gameBoard.gameState).includes("");
         if (roundDraw) {
+            console.log("draw");
             statusDisplay.innerHTML = drawMessage();
+            
             gameActive = false;
             return;
         }
-        /*
-        If we get to here we know that the no one won the game yet, 
-        and that there are still moves to be played, so we continue by changing the current player.
-        */
-        handlePlayerChange();
+        
     };
 
     return {
         validate,
+        currentPlayerTurn,
+        statusDisplay,
     };
 })();
 
-    
 
 
 
 //create using factories
-function handlePlayerChange() {
 
-}
+/*
+If we get to here we know that the no one won the game yet, 
+and that there are still moves to be played, so we continue by changing the current player.
+*/
+const changePlayer = () => {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    validateResults.statusDisplay.innerHTML = validateResults.currentPlayerTurn();
+};
 
 
 
@@ -203,5 +215,6 @@ document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click'
     gameController.getArrIndex(currentCell);
     gameController.cellPlayed(currentCell);
     validateResults.validate();
+    changePlayer();
 }));
 // document.querySelector('.game-restart').addEventListener('click', handleRestartGame);
