@@ -38,21 +38,12 @@ const gameBoard = (() => {
     will allow us to easily track played cells and validate the game state later on
     */
 
-    // let gameState = ["0", "", "", "", "", "", "", "", ""];
-
-    let gameState = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    let gameState = ["", "", "", "", "", "", "", "", ""];
 
     
 
-    document.querySelectorAll('.cell').forEach(function(node) {
-        //assign array to elements 
-        for (let index = 0; index < gameState.length; index++) {
-            // console.log("index", index);
-            let x = gameState[index];
-            console.log(x);
-        }
-        console.log(node.innerHTML = x);
-    });
+    
+
 
     
 
@@ -122,10 +113,10 @@ const gameController = (() => {
     //Please note that the getAttribute will return a string value. Since we need an actual number we will parse it to an 
     //integer(number)
 
-    const clickedCellAttr = (cellAttr) => console.log(cellAttr, (parseInt(cellAttr.path[0].getAttribute('data-cell-index'))));
+    const clickedCellAttr = (cellAttr) => (parseInt(cellAttr.path[0].getAttribute('data-cell-index')));
 
-
-    const getArrIndex = (arrIndex) => console.log(arrIndex.path[0].innerHTML);
+    // use clickedCellAttr to get element in array(it works)
+    const getArrIndex = (arrIndex) => (gameBoard.gameState[clickedCellAttr(arrIndex)]);
     // Next up we need to check whether the call has already been played, 
     // or if the game is paused. If either of those is true we will simply ignore the click.
     //   
@@ -133,31 +124,26 @@ const gameController = (() => {
     let gameActive = true;
 
    
-
+    // (it works)
     const alreadyClicked = (cell) => {
-        if (gameBoard.gameState[clickedCellIndex(cell)] !== "" || !gameActive) {
-            return;
+        if (getArrIndex(cell) !== "" || !gameActive) {
+            return(console.log("already clicked"));
         }
     };
 
-
+    // (it works)
     const cellPlayed = (cell) => {
         
         /*
         We update our internal game state to reflect the played move, 
         as well as update the user interface to reflect the played move
         */
-
-        // gameBoard.gameState[clickedCellIndex(cell)] = currentPlayer;
-        // clickedCell.innerHTML = currentPlayer;
+    
+        gameBoard.gameState[clickedCellAttr(cell)] = currentPlayer;
+        cell.target.innerHTML = currentPlayer;
 
         
-       gameBoard.gameState[clickedCellAttr(cell)];
-    //    console.log(x);
-    //     x = currentPlayer;
-    //     // console.log(x, gameBoard.gameState);
-    //     let y = clickedCell.innerHTML;
-    //     y = currentPlayer;
+       
         
         
     };
@@ -173,6 +159,7 @@ const gameController = (() => {
         clickedCellAttr,
         alreadyClicked,
         getArrIndex,
+        cellPlayed,
     };
 })();
 
@@ -211,7 +198,8 @@ restart button
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', (currentCell) => {
     gameController.clickedCell(currentCell);
     gameController.clickedCellAttr(currentCell);
-    // gameController.alreadyClicked(currentCell);
+    gameController.alreadyClicked(currentCell);
     gameController.getArrIndex(currentCell);
+    gameController.cellPlayed(currentCell);
 }));
 // document.querySelector('.game-restart').addEventListener('click', handleRestartGame);
