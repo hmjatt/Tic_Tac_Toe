@@ -3,14 +3,6 @@
 
 
 /*
-
-We will store our current player here, so we know whos turn 
-*/
-let currentPlayer = "X";
-
-
-
-/*
 We set the inital message to let the players know whose turn it is
 */
 // statusDisplay.innerHTML = currentPlayerTurn();
@@ -40,7 +32,7 @@ const gameBoard = (() => {
 //create gameController using module
 
 const gameController = (() => {
-    // We will save the clicked html element in a variable for easier further use
+    // We will save the clicked html element in an function named clickedCell for easier further use
     const clickedCell = (clickedCellEvent) => (clickedCellEvent.target);
 
     //Here we will grab the 'data-cell-index' attribute from the clicked cell to identify where that cell is in our grid. 
@@ -113,9 +105,13 @@ const validateResults = (() => {
         [2, 4, 6]
     ];
 
-    const currentPlayerTurn = () => {
-        `It's ${currentPlayer}'s turn`;
-    };
+    /*
+    We store our game status element here to allow us to more easily 
+    use it later on 
+    */
+    const statusDisplay = document.querySelector('.game-status');
+
+    
 
  
 
@@ -130,9 +126,8 @@ const validateResults = (() => {
         we have declared them as functions, so that the actual message gets created with 
         current data every time we need it.
         */
-        const winningMessage = () => `Player ${currentPlayer} has won!`;
-        const drawMessage = () => `Game ended in a draw!`;
-        
+       
+    
       
         // it works
         for (let i = 0; i <= 7; i++) {
@@ -154,7 +149,11 @@ const validateResults = (() => {
         // it works
         if (roundWon) {
             //call winningMessage(some condition inside factory)
-            statusDisplay.innerHTML = winningMessage();
+            //use concatenatice inheritance/cloning to copy properties of one object to other object
+            const won = Object.assign({}, resultMessage, {name: `${currentPlayer}`});
+            //assign the method to a variable
+            const wonMsg = won.winMessage();
+            statusDisplay.innerHTML = wonMsg;
             gameActive = false;
             return;
         }
@@ -167,7 +166,12 @@ const validateResults = (() => {
         if (roundDraw) {
             console.log("draw");
             //call the drawMessage property inside statusDisplay factory function
-            statusDisplay.innerHTML = drawMessage();
+            //use concatenatice inheritance/cloning to copy properties of one object to other object
+            const draw = Object.assign({}, resultMessage, {name: `${currentPlayer}`});
+            //assign the method to a variable
+            const drawMsg = draw.drawMessage();
+            statusDisplay.innerHTML = drawMsg;
+            // statusDisplay.innerHTML = drawMessage();
             //set game state(which is inside gameController module) to false
             gameActive = false;
             return;
@@ -183,29 +187,22 @@ const validateResults = (() => {
 })();
 
 
-//create status/result message using factories
-
-/*
-We store our game status element here to allow us to more easily 
-use it later on 
-*/
-const statusDisplay = document.querySelector('.game-status');
+//create result message using factories
 
 //one object
-const proto = {
-    // create a property and assign a function as its value
-    hello: function hellosaas() {
-      return `Hello, my name is ${ this.name }`;
+const resultMessage = {
+    
+    // create a winMessage property and assign a function as its value
+    winMessage: function winMessage() {
+      return `${ this.name } Won this game!`;
+    },
+
+    //create a drawMessage property and assign a function as its value
+    drawMessage: function drawMessage() {
+        return `This game was a draw!`;
     }
 };
   
-//use concatenatice inheritance/cloning to copy properties of one object to other object
-const george = Object.assign({}, proto, {name: 'George'});
-  
-//assign the method to a variable
-const msg = george.hello();
-
-console.log(msg); // Hello, my name is George
 
 //create players using factories
 
@@ -213,8 +210,37 @@ console.log(msg); // Hello, my name is George
 If we get to here we know that the no one won the game yet, 
 and that there are still moves to be played, so we continue by changing the current player.
 */
-const changePlayer = () => {
+const changePlayer = {
+    // create a playerOne property and assign a function as its value
+    playerOne: function currentPlayer() {
+        /*
+        put it inside changePlayer Factory, change the state using concatenative inheritance,
+        add reference to each player using properties and use function to determine value
+        We will store our current player here, so we know whos turn 
+        */
+        return this.name;
+    },
+
+    // create a playerTwo property and assign a function as its value
+    playerTwo: function currentPlayer() {
+        /*
+        put it inside changePlayer Factory, change the state using concatenative inheritance,
+        add reference to each player using properties and use function to determine value
+        We will store our current player here, so we know whos turn 
+        */
+        return this.name;
+    },
+
+    
+
+    
+};
+
+// put it inside a function and call it on each click
+//put it inside changePlayer factory
+const currentPlayerTurn = () => {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
+    `It's ${currentPlayer}'s turn`;
     validateResults.statusDisplay.innerHTML = validateResults.currentPlayerTurn();
 };
 
@@ -237,6 +263,7 @@ document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click'
     gameController.getArrIndex(currentCell);
     gameController.cellPlayed(currentCell);
     validateResults.validate();
-    changePlayer();
+    // changePlayer();
+    console.log(typeof(gameController.clickedCell));
 }));
 // document.querySelector('.game-restart').addEventListener('click', handleRestartGame);
