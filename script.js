@@ -57,7 +57,9 @@ const gameController = (() => {
     // Next up we need to check whether the call has already been played, 
     // or if the game is paused. If either of those is true we will simply ignore the click.
     //   
-  
+    
+
+    //convert into module and IIFE it
     let gameActive = true;
 
    
@@ -99,7 +101,7 @@ const gameController = (() => {
 //create validateResults using module
 const validateResults = (() => {
 
-    //array that defines condition required to win the game
+    //array that defines conditions required to win the game
     const winningConditions = [
         [0, 1, 2],
         [3, 4, 5],
@@ -115,11 +117,7 @@ const validateResults = (() => {
         `It's ${currentPlayer}'s turn`;
     };
 
-    /*
-    We store our game status element here to allow us to more easily 
-    use it later on 
-    */
-    const statusDisplay = document.querySelector('.game-status');
+ 
 
     //determines if any player won (Works)
     const validate = () => {
@@ -155,6 +153,7 @@ const validateResults = (() => {
         // shows a message if someone won and stop the game
         // it works
         if (roundWon) {
+            //call winningMessage(some condition inside factory)
             statusDisplay.innerHTML = winningMessage();
             gameActive = false;
             return;
@@ -167,8 +166,9 @@ const validateResults = (() => {
         let roundDraw = Object.values(!gameBoard.gameState).includes("");
         if (roundDraw) {
             console.log("draw");
+            //call the drawMessage property inside statusDisplay factory function
             statusDisplay.innerHTML = drawMessage();
-            
+            //set game state(which is inside gameController module) to false
             gameActive = false;
             return;
         }
@@ -178,14 +178,36 @@ const validateResults = (() => {
     return {
         validate,
         currentPlayerTurn,
-        statusDisplay,
+        // statusDisplay,
     };
 })();
 
 
+//create status/result message using factories
 
+/*
+We store our game status element here to allow us to more easily 
+use it later on 
+*/
+const statusDisplay = document.querySelector('.game-status');
 
-//create using factories
+//one object
+const proto = {
+    // create a property and assign a function as its value
+    hello: function hellosaas() {
+      return `Hello, my name is ${ this.name }`;
+    }
+};
+  
+//use concatenatice inheritance/cloning to copy properties of one object to other object
+const george = Object.assign({}, proto, {name: 'George'});
+  
+//assign the method to a variable
+const msg = george.hello();
+
+console.log(msg); // Hello, my name is George
+
+//create players using factories
 
 /*
 If we get to here we know that the no one won the game yet, 
