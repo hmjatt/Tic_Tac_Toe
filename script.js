@@ -59,6 +59,8 @@ const gameController = (() => {
         }
     };
 
+    let currentPlayer = "Player 2";
+
     // (it works)
     const cellPlayed = (cell) => {
         
@@ -66,14 +68,12 @@ const gameController = (() => {
         We update our internal game state to reflect the played move, 
         as well as update the user interface to reflect the played move
         */
+       console.log(currentPlayer);
     
-        gameBoard.gameState[clickedCellAttr(cell)] = validateResults.handlePlayerChange.player1Playing;
-        cell.target.innerHTML = validateResults.handlePlayerChange.player1Playing;
+        gameBoard.gameState[clickedCellAttr(cell)] = currentPlayer;
+        cell.target.innerHTML = currentPlayer;
 
-        
-       
-        
-        
+      
     };
 
     return {
@@ -81,7 +81,7 @@ const gameController = (() => {
         clickedCellAttr,
         alreadyClicked,
         getArrIndex,
-        cellPlayed,
+        cellPlayed
     };
 })();
 
@@ -155,7 +155,7 @@ const validateResults = (() => {
         if (roundWon) {
             //call winningMessage(some condition inside factory)
             //use concatenatice inheritance/cloning to copy properties of one object to other object
-            const won = Object.assign({}, resultMessage, {name: `${validateResults.handlePlayerChange.player1Playing}`});
+            const won = Object.assign({}, resultMessage, {name: `${validateResults.handlePlayerChange.playerStr}`});
             //assign the method to a variable
             const wonMsg = won.winMessage();
             gameResult.innerHTML = wonMsg;
@@ -172,7 +172,7 @@ const validateResults = (() => {
             console.log("draw");
             //call the drawMessage property inside resultMessage factory function
             //use concatenatice inheritance/cloning to copy properties of one object to other object
-            const draw = Object.assign({}, resultMessage, {name: `${validateResults.handlePlayerChange.player1Playing}`});
+            const draw = Object.assign({}, resultMessage, {name: `${validateResults.handlePlayerChange.playerStr}`});
             //assign the method to a variable
             const drawMsg = draw.drawMessage();
             gameResult.innerHTML = drawMsg;
@@ -180,11 +180,15 @@ const validateResults = (() => {
             gameActive = false;
             return;
         }
+
+        validateResults.handlePlayerChange;
         
     };
 
+    
+
     // (it works)
-    const handlePlayerChange= () => {
+    const handlePlayerChange= (cell) => {
         
         /*
         We update our internal game state to reflect the played move, 
@@ -195,31 +199,46 @@ const validateResults = (() => {
     
         let player1Playing = "Player 1";
 
-        let playerTurnMsg = `It's ${player1Playing}'s turn`;
-        playerChange.innerHTML = playerTurnMsg;
+        gameBoard.gameState[gameController.clickedCellAttr(cell)] = player1Playing;
+        cell.target.innerHTML = player1Playing;
+        
         
         let player2Playing = "Player 2";
+
+        // grab current cell innerHTML
+        let currentPlayer = cell.target.innerHTML;
+
+        console.log(currentPlayer);
         
         
-        const player1Msg = Object.assign({}, changePlayer, {name: `${validateResults.handlePlayerChange.playerPlaying}`});
-        const player2Msg = Object.assign({}, changePlayer, {name: `${validateResults.handlePlayerChange.player2Playing}`});
+        const player1Msg = Object.assign({}, changePlayer, {name: `${player1Playing}`});
+        const player2Msg = Object.assign({}, changePlayer, {name: `${player2Playing}`});
         const player1turnmsg = player1Msg.playerOne();
         const player2turnmsg = player2Msg.playerTwo();
         
+        let playerStr = "";
+
         // player1Playing = player1Playing === player1turnmsg ? player2turnmsg : player1turnmsg;
-        if(player1Playing === player2turnmsg) {
-            player1Playing = player1turnmsg;
-        }else if(player1Playing === player1turnmsg) {
-            player1Playing = player2turnmsg;
+        if(currentPlayer === player1turnmsg) {
+            playerStr = player2turnmsg;
+        }else if(currentPlayer === player2turnmsg) {
+            playerStr = player1turnmsg;
         }
-        console.log(player1Playing);
+        
+        console.log(playerStr);
+
+        let playerTurnMsg = `It's ${playerStr}'s turn`;
+        playerChange.innerHTML = playerTurnMsg;
         
         // `It's ${currentPlayer}'s turn`;
         // //assign in to game-turn id
-        playerChange.innerHTML = player1Playing;
+        // playerChange.innerHTML = playerStr;
         // validateResults.statusDisplay.innerHTML = validateResults.currentPlayerTurn();
+        gameBoard.gameState[gameController.clickedCellAttr(cell)] = playerStr;
+        // cell.target.innerHTML = playerStr;
           
     };
+    
 
     return {
         validate,
@@ -304,10 +323,13 @@ document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click'
     gameController.clickedCellAttr(currentCell);
     gameController.alreadyClicked(currentCell);
     gameController.getArrIndex(currentCell);
+    
+    validateResults.validate(currentCell);
+    // validateResults.handlePlayerChange(currentCell);
     gameController.cellPlayed(currentCell);
-    validateResults.validate();
-    validateResults.handlePlayerChange();
+    
+    console.log(gameBoard.gameState);
     // changePlayer();
-    console.log(validateResults.handlePlayerChange.player1Playing);
+    // console.log(validateResults.handlePlayerChange.player1Playing);
 }));
 // document.querySelector('.game-restart').addEventListener('click', handleRestartGame);
