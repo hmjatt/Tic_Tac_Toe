@@ -85,13 +85,13 @@
                 <h1>Tic Tac Toe</h1>
             </div>
             <div class="scoreboard-div">
-                <h2>Player1</h2>
+                <h2>Player 1</h2>
                 <div id="scoreboard">
                     <p id="player1Score">0</p>
                     <p>-</p>
                     <p id="player1Score">0</p>
                 </div>
-                <h2>Player2</h2>
+                <h2>Player 2</h2>
             </div>
             <div class="game-container">
                 <div data-cell-index="0" class="cell"></div>
@@ -104,8 +104,11 @@
                 <div data-cell-index="7" id="v2" class="cell"></div>
                 <div data-cell-index="8" class="cell"></div>
             </div>
-            <div class="winner">
-                <h2 class="game-status">Game in progress</h2>
+            <div class="turn-div">
+                <h2 id="game-turn"></h2>
+            </div>
+            <div class="result-div">
+                <h2 id="game-result"></h2>
             </div>
             <div class="theme">
                 <button id="themeBtn"><img src="images/svgs/themeDark.svg" alt="settings"></button>
