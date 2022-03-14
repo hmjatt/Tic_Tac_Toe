@@ -59,7 +59,7 @@ const gameController = (() => {
         }
     };
 
-    let currentPlayer = "Player 2";
+    
 
     // (it works)
     const cellPlayed = (cell) => {
@@ -68,11 +68,11 @@ const gameController = (() => {
         We update our internal game state to reflect the played move, 
         as well as update the user interface to reflect the played move
         */
-       console.log(currentPlayer);
-    
+    //    console.log(currentPlayer);
+    let currentPlayer = cell.target.innerHTML;
         gameBoard.gameState[clickedCellAttr(cell)] = currentPlayer;
         cell.target.innerHTML = currentPlayer;
-
+        // validateResults.handlePlayerChange;
       
     };
 
@@ -81,7 +81,7 @@ const gameController = (() => {
         clickedCellAttr,
         alreadyClicked,
         getArrIndex,
-        cellPlayed
+        
     };
 })();
 
@@ -181,7 +181,7 @@ const validateResults = (() => {
             return;
         }
 
-        validateResults.handlePlayerChange;
+        // validateResults.handlePlayerChange;
         
     };
 
@@ -199,16 +199,16 @@ const validateResults = (() => {
     
         let player1Playing = "Player 1";
 
-        gameBoard.gameState[gameController.clickedCellAttr(cell)] = player1Playing;
-        cell.target.innerHTML = player1Playing;
-        
+        // gameBoard.gameState[gameController.clickedCellAttr(cell)] = player1Playing;
+        // cell.target.innerHTML = player1Playing;
+        // console.log(gameBoard.gameState);
         
         let player2Playing = "Player 2";
 
         // grab current cell innerHTML
-        let currentPlayer = cell.target.innerHTML;
+        
 
-        console.log(currentPlayer);
+        
         
         
         const player1Msg = Object.assign({}, changePlayer, {name: `${player1Playing}`});
@@ -218,8 +218,14 @@ const validateResults = (() => {
         
         let playerStr = "";
 
+        let currentPlayer = cell.target.innerHTML;
+        console.log(currentPlayer);
+        console.log(playerStr);
+
         // player1Playing = player1Playing === player1turnmsg ? player2turnmsg : player1turnmsg;
-        if(currentPlayer === player1turnmsg) {
+        if(currentPlayer == "") {
+            playerStr = player1turnmsg;
+        }else if(currentPlayer === player1turnmsg) {
             playerStr = player2turnmsg;
         }else if(currentPlayer === player2turnmsg) {
             playerStr = player1turnmsg;
@@ -323,13 +329,18 @@ document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click'
     gameController.clickedCellAttr(currentCell);
     gameController.alreadyClicked(currentCell);
     gameController.getArrIndex(currentCell);
-    
+    // gameController.cellPlayed(currentCell);
     validateResults.validate(currentCell);
     // validateResults.handlePlayerChange(currentCell);
-    gameController.cellPlayed(currentCell);
     
-    console.log(gameBoard.gameState);
+    
+    
     // changePlayer();
     // console.log(validateResults.handlePlayerChange.player1Playing);
+}));
+
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', (currentCell) => {
+    validateResults.handlePlayerChange(currentCell);
+    console.log(gameBoard.gameState);
 }));
 // document.querySelector('.game-restart').addEventListener('click', handleRestartGame);
