@@ -4,7 +4,7 @@
 We store our game status element here to allow us to more easily 
 use it later on 
 */
-const statusDisplay = document.querySelector('.game-status');
+const statusDisplay = document.getElementById('game-status');
 /*
 Here we declare some variables that we will use to track the 
 game state throught the game. 
@@ -44,18 +44,43 @@ function handlePlayerChange() {
 function handleResultValidation() {
 
 }
-function handleCellClick() {
+const gameController = (() => {
 
-}
-function handleRestartGame() {
+    const clickedCell = (clickedCellEvent) => (clickedCellEvent.target, console.log("clickedCell"));
 
-}
+    const clickedCellAttr = () => (parseInt(clickedCell.getAttribute('data-cell-index')));
+             // (it works)
+    const alreadyClicked = (cell) => {
+        if (gameState[clickedCellAttr] !== "" || !gameActive) {
+            return(console.log("already clicked"), gameController.clickedCell);
+        }
+    };
+        
+
+    
+        
+    
+        return {
+            alreadyClicked,
+            // gameControl(clickedCell),
+            // clickedCellAttr,
+            // alreadyClicked,
+            // getArrIndex,
+            // cellPlayed,
+        };
+
+
+})();
 /*
 And finally we add our event listeners to the actual game cells, as well as our 
 restart button
 */
-document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
-document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', (currentCell) => {
+    gameController.alreadyClicked(currentCell);
+        
+        
+    }));
+// document.querySelector('.game--restart').addEventListener('click', handleRestartGame);
 
 
 
