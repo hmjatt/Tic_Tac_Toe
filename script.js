@@ -46,23 +46,42 @@ function handleResultValidation() {
 }
 const gameController = (() => {
 
-    const clickedCell = (clickedCellEvent) => (clickedCellEvent.target);
+    const clickedCell = (clickedCellEvent) =>{
+        let clicked = clickedCellEvent.target;
+        let clickedAttr = (parseInt(clicked.getAttribute('data-cell-index')));
+        if (gameState[clickedAttr] == "" && gameActive == true) {
+            console.log("proceed with click");
+            handleCellPlayed();
+        } else if (gameState[clickedAttr] !== "" || !gameActive) {
+            console.log("a;ready clicked", (parseInt(cell.target.getAttribute('data-cell-index'))));
+            return;
+        }
+        console.log(clickedAttr ,clicked);
 
-    const clickedCellAttr = () => (parseInt(clickedCell.getAttribute('data-cell-index')));
+
+    };
+
+    function handleCellPlayed(clicked, clickedAttr) {
+        gameState[clickedAttr] = currentPlayer;
+        clicked.innerHTML = currentPlayer;
+    }
+
+    // Works
+    const clickedCellAttr = (cell) => console.log((parseInt(cell.target.getAttribute('data-cell-index'))));
              // (it works)
-    const alreadyClicked = () => {
-        if (gameState[clickedCellAttr] !== "" || !gameActive) {
+    const alreadyClicked = (cell) => {
+        if (gameState[clickedCellAttr] == "" && gameActive == true) {
+            console.log("proceed with click");
+        } else if (gameState[clickedCellAttr] !== "" || !gameActive) {
+            console.log("a;ready clicked", (parseInt(cell.target.getAttribute('data-cell-index'))));
             return;
         }
 
-        handleCellPlayed();
-        handleResultValidation();
+        
+        // handleResultValidation();
 
 
-        function handleCellPlayed(clickedCell, clickedCellAttr) {
-            gameState[clickedCellAttr] = currentPlayer;
-            clickedCell.innerHTML = currentPlayer;
-        }
+        
 
         const winningConditions = [
             [0, 1, 2],
@@ -131,7 +150,7 @@ const gameController = (() => {
         
     
         return {
-            alreadyClicked,
+            clickedCell,
             // alreadyClicked,
         };
 
@@ -142,7 +161,7 @@ And finally we add our event listeners to the actual game cells, as well as our
 restart button
 */
 document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', (currentCell) => {
-    gameController.alreadyClicked(currentCell);
+    gameController.clickedCell(currentCell);
         
         
     }));
