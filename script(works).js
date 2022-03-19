@@ -1,7 +1,6 @@
-//script for Tic Tac Toe
 
 
-//put everything in private scope
+
 
 /*
 We store our game status element here to allow us to more easily 
