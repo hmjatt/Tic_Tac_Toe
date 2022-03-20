@@ -2,43 +2,6 @@
 
 
 
-//script for Tic Tac Toe
-
-
-//put everything in private scope
-
-/*
-We store our game status element here to allow us to more easily 
-use it later on 
-*/
-
-/*
-Here we declare some variables that we will use to track the 
-game state throught the game. 
-*/
-/*
-We will use gameActive to pause the game in case of an end scenario
-*/
-
-/*
-We will store our current player here, so we know whos turn 
-*/
-
-/*
-We will store our current game state here, the form of empty strings in an array
- will allow us to easily track played cells and validate the game state later on
-*/
-
-/*
-Here we have declared some messages we will display to the user during the game.
-Since we have some dynamic factors in those messages, namely the current player,
-we have declared them as functions, so that the actual message gets created with 
-current data every time we need it.
-*/
-
-/*
-We set the inital message to let the players know whose turn it is
-*/
 
 
 const gameController = (() => {
@@ -50,8 +13,11 @@ const gameController = (() => {
     let currentPlayer = "X";
 
     let gameActive = true;
+    
 
     let gameState = ["", "", "", "", "", "", "", "", ""];
+
+
 
 
     const winningMessage = () => `Player ${currentPlayer} has won!`;
@@ -69,7 +35,9 @@ const gameController = (() => {
             
             gameState[clickedAttr] = currentPlayer;
             clicked.innerHTML = currentPlayer;
+            // verify if player won
             handleResultValidation();
+            
             
         } else if (gameState[clickedAttr] !== "" || !gameActive) {
            
@@ -131,6 +99,77 @@ const gameController = (() => {
             handlePlayerChange();
             function handlePlayerChange() {
                 currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+                if(currentPlayer == "O") {
+                    console.log("its ai turn");
+                    //if its ai turn make ai decision based apon its difficulty
+                    // /*
+                    //  * Constructs an AI player with a specific level of intelligence
+                    //  * @param level [String]: the desired level of intelligence
+                    //  */
+                    // let ai = function(level) {
+
+                    //     //private attribute: level of intelligence the player has
+                    //     var levelOfIntelligence = level;
+
+                    //     //private attribute: the game the player is playing
+                    //     var game = {};
+
+                    //     /*
+                    //      * private recursive function that computes the minimax value of a game state
+                    //      * @param state [State] : the state to calculate its minimax value
+                    //      * @returns [Number]: the minimax value of the state
+                    //      */
+                    //     function minimaxValue(state) { ... }
+
+                    //     /*
+                    //      * private function: make the ai player take a blind move
+                    //      * that is: choose the cell to place its symbol randomly
+                    //      * @param turn [String]: the player to play, either X or O
+                    //      */
+                    //     function takeABlindMove(turn) { ... }
+
+                    //     /*
+                    //      * private function: make the ai player take a novice move,
+                    //      * that is: mix between choosing the optimal and suboptimal minimax decisions
+                    //      * @param turn [String]: the player to play, either X or O
+                    //      */
+                    //     function takeANoviceMove(turn) { ... }
+
+                    //     /*
+                    //      * private function: make the ai player take a master move,
+                    //      * that is: choose the optimal minimax decision
+                    //      * @param turn [String]: the player to play, either X or O
+                    //      */
+                    //     function takeAMasterMove(turn) { ... }
+
+
+                    //     /*
+                    //      * public method to specify the game the ai player will play
+                    //      * @param _game [Game] : the game the ai will play
+                    //      */
+                    //     this.plays = function(_game){
+                    //         game = _game;
+                    //     };
+
+                    //     /*
+                    //      * public function: notify the ai player that it's its turn
+                    //      * @param turn [String]: the player to play, either X or O
+                    //      */
+                    //     this.notify = function(turn) {
+                    //         switch(levelOfIntelligence) {
+                    //             //invoke the desired behavior based on the level chosen
+                    //             case "blind": takeABlindMove(turn); break;
+                    //             case "novice": takeANoviceMove(turn); break;
+                    //             case "master": takeAMasterMove(turn); break;
+                    //         }
+                    //     };
+                    // };
+
+                }else if(currentPlayer == "X") {
+                    console.log("its player turn");
+                }
+
                 statusDisplay.innerHTML = currentPlayerTurn();
             }
         
@@ -154,6 +193,7 @@ const gameController = (() => {
 
 
 })();
+
 
 
 
