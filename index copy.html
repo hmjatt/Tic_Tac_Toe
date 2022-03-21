@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <meta name="author" content="Harmeet Matharoo">
+    <link rel="icon" sizes="32x32" href="images/tic-tac-toe.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container-div">
+
+        <div class="page1">
+            <div class="logo">
+                <a href="https://github.com/hmjatt">
+                    <img src="images/id-logo.png" alt="github-logo">
+                </a>
+            </div>
+            <div class="game-title">
+                <h1>Tic Tac Toe</h1>
+            </div>
+            <div class="XO">
+                <img src="images/svgs/X.svg" alt="X">
+                <img src="images/svgs/O.svg" alt="O">
+            </div>
+            <div class="opponent">
+                <h2>Choose your opponent</h2>
+                <button id="ai">Ai</button>
+                <button id="friend">Friend</button>
+            </div>
+            <div class="theme">
+                <button id="themeBtn"><img src="images/svgs/themeDark.svg" alt="settings"></button>
+            </div>
+        </div>
+
+
+
+        <div class="page2">
+            <div class="logo">
+                <a href="https://github.com/hmjatt">
+                    <img src="images/id-logo.png" alt="github-logo">
+                </a>
+            </div>
+            <div class="game-title">
+                <h1>Tic Tac Toe</h1>
+            </div>
+            <div class="pick-side">
+                <h2>Pick a side</h2>
+            </div>
+            <div class="X-O">
+                <div class="x">
+                    <img src="images/svgs/X.svg" alt="X">
+                    <input type="radio" id="X" name="fav_language" value="x">
+                    <label for="X"></label>
+                </div>
+                <div class="o">
+                    <img src="images/svgs/O.svg" alt="O">
+                    <input type="radio" id="O" name="fav_language" value="o">
+                    <label for="O"></label>
+                </div>
+            </div>
+            <div class="lets-play">
+                <button id="letsPlayBtn">Ai</button>
+            </div>
+            <div class="theme">
+                <button id="themeBtn"><img src="images/svgs/themeDark.svg" alt="settings"></button>
+            </div>
+        </div>
+
+
+
+        <div class="page3">
+            <div class="logo">
+                <a href="https://github.com/hmjatt">
+                    <img src="images/id-logo.png" alt="github-logo">
+                </a>
+            </div>
+            <div class="game-title">
+                <h1>Tic Tac Toe</h1>
+            </div>
+            <div class="scoreboard-div">
+                <h2>Player 1</h2>
+                <div id="scoreboard">
+                    <p id="player1Score">0</p>
+                    <p>-</p>
+                    <p id="player1Score">0</p>
+                </div>
+                <h2>Player 2</h2>
+            </div>
+            <div class="game-container">
+                <div data-cell-index="0" class="cell"></div>
+                <div data-cell-index="1" id="v" class="cell"></div>
+                <div data-cell-index="2" class="cell"></div>
+                <div data-cell-index="3" id="v3" class="cell"></div>
+                <div data-cell-index="4" id="v1" class="cell"></div>
+                <div data-cell-index="5" id="v4" class="cell"></div>
+                <div data-cell-index="6" class="cell"></div>
+                <div data-cell-index="7" id="v2" class="cell"></div>
+                <div data-cell-index="8" class="cell"></div>
+            </div>
+            <!-- <div class="turn-div">
+                <h2 id="game-turn">It's Player 1's turn</h2>
+            </div> -->
+            <div class="result-div">
+                <h2 id="game-status"></h2>
+            </div>
+            <div class="theme">
+                <button id="themeBtn"><img src="images/svgs/themeDark.svg" alt="settings"></button>
+            </div>
+        </div>
+
+
+
+        <div class="page4">
+            <div class="logo">
+                <a href="https://github.com/hmjatt">
+                    <img src="images/id-logo.png" alt="github-logo">
+                </a>
+            </div>
+            <div class="game-title">
+                <h1>Tic Tac Toe</h1>
+            </div>
+            <div class="winner">
+                <h2 class="game-status-c">Player 1 Won</h2>
+            </div>
+            <div class="restart">
+                <button id="game-restart">Restart</button>
+            </div>
+            <div class="theme">
+                <button id="themeBtn"><img src="images/svgs/themeDark.svg" alt="settings"></button>
+            </div>
+        </div>
+ 
+    </div>
+    
+
+
+    <script src="script.js"></script>
+</body>
+</html>
