@@ -63,9 +63,19 @@ const ticTacToe = (() => {
 	let human = Object.assign({}, players, {human: 'O'});
 	let huPlayer = human.huPlayer();
 
+	let playingVsPlayer = false;
+
+
+
+
 	//make a reference to ai player
 	let robot = Object.assign({}, players, {robot: 'X'});
 	let aiPlayer = robot.aiPlayer();
+
+
+	const player2IsHuman = () => {
+		playingVsPlayer = true;
+	}
 
 	const startGame = () => {
 		document.querySelector(".endgame").style.display = "none";
@@ -86,8 +96,18 @@ const ticTacToe = (() => {
 		// turn(square.target.id, huPlayer);
 
 		if (typeof origBoard[square.target.id] == 'number') {
-			turn(square.target.id, huPlayer)
-			if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) turn(bestSpot(), aiPlayer);
+			if(playingVsPlayer === true) {
+				turn(square.target.id, huPlayer);
+				
+				if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) {
+					huPlayer = huPlayer === "X" ? "O" : "X";
+				}
+				
+			}else if(playingVsPlayer === false){
+				turn(square.target.id, huPlayer)
+				if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) turn(bestSpot(), aiPlayer);
+			}
+			
 		}
 	}
 
@@ -170,6 +190,7 @@ const ticTacToe = (() => {
 	  turnClick,
 	  cells,
 	  emptySquares,
+	  player2IsHuman,
 	};
   })();
 
