@@ -58,6 +58,7 @@ const ticTacToe = (() => {
 	// console.log(typeof(origBoard), origBoard);
 	
 	const cells = document.querySelectorAll('.cell');
+	const turnMsg = document.getElementById('turn-msg');
 
 	//make a reference to human player
 	let human = Object.assign({}, players, {human: 'O'});
@@ -100,7 +101,10 @@ const ticTacToe = (() => {
 				turn(square.target.id, huPlayer);
 				
 				if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) {
+					
 					huPlayer = huPlayer === "X" ? "O" : "X";
+					let turn = `It's ${huPlayer}'s turn`;
+					turnMsg.innerHTML = turn;
 				}
 				
 			}else if(playingVsPlayer === false){
@@ -228,7 +232,7 @@ const resultValidation = (() => {
 		for (var i = 0; i < cells.length; i++) {
 			cells[i].removeEventListener('click', ticTacToe.turnClick, false);
 		}
-		declareWinner(gameWon.player == huPlayer ? "You win!" : "You lose.");
+		declareWinner(gameWon.player == huPlayer ? "O won!" : "X Won!");
 	}
 
 
