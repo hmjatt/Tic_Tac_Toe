@@ -59,12 +59,14 @@ const ticTacToe = (() => {
 	
 	const cells = document.querySelectorAll('.cell');
 	const turnMsg = document.getElementById('turn-msg');
+	
 
 	//make a reference to human player
 	let human = Object.assign({}, players, {human: 'O'});
 	let huPlayer = human.huPlayer();
 
 	let playingVsPlayer = false;
+	let noviceDifficulty = false;
 
 
 
@@ -76,6 +78,10 @@ const ticTacToe = (() => {
 
 	const player2IsHuman = () => {
 		playingVsPlayer = true;
+	}
+
+	const noviceAiDifficulty = () => {
+		noviceDifficulty = true;
 	}
 
 	const startGame = () => {
@@ -93,6 +99,17 @@ const ticTacToe = (() => {
 
 	}
 
+	// const turnClick =(square) => {
+	// 	// turn(square.target.id, huPlayer);
+
+	// 	if (typeof origBoard[square.target.id] == 'number') {
+			
+	// 		turn(square.target.id, huPlayer);
+	// 		if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) turn(bestSpot(), aiPlayer);	
+				
+	// 	}
+	// }
+
 	const turnClick =(square) => {
 		// turn(square.target.id, huPlayer);
 
@@ -103,13 +120,20 @@ const ticTacToe = (() => {
 				if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) {
 					
 					huPlayer = huPlayer === "X" ? "O" : "X";
-					let turn = `It's ${huPlayer}'s turn`;
-					turnMsg.innerHTML = turn;
+					let turns = `It's ${huPlayer}'s turn`;
+					turnMsg.innerHTML = turns;
 				}
 				
 			}else if(playingVsPlayer === false){
 				turn(square.target.id, huPlayer)
-				if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) turn(bestSpot(), aiPlayer);
+				if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) {
+					if (noviceDifficulty === false) {
+						turn(bestSpot(), aiPlayer);
+					}else if (noviceDifficulty === true) {
+						turn(noviceSpot(), aiPlayer);
+					}
+					
+				}
 			}
 			
 		}
@@ -129,13 +153,22 @@ const ticTacToe = (() => {
 	}
 	
 	const bestSpot= () => {
+		// if (noviceDifficulty === true) {
+		// 	noviceAi(origBoard, aiPlayer).index;
+		// } else if(noviceDifficulty === false){
+			
+		// }
 		return minimax(origBoard, aiPlayer).index;
+	}
+
+	const noviceSpot = () => {
+		return noviceAi(origBoard, aiPlayer).index;
 	}
 
 
 
 	const minimax = (newBoard, player) => {
-		var availSpots = emptySquares();
+		let availSpots = emptySquares();
 	
 		if (resultValidation.checkWin(newBoard, huPlayer)) {
 			return {score: -10};
@@ -144,17 +177,17 @@ const ticTacToe = (() => {
 		} else if (availSpots.length === 0) {
 			return {score: 0};
 		}
-		var moves = [];
-		for (var i = 0; i < availSpots.length; i++) {
-			var move = {};
+		let moves = [];
+		for (let i = 0; i < availSpots.length; i++) {
+			let move = {};
 			move.index = newBoard[availSpots[i]];
 			newBoard[availSpots[i]] = player;
 	
 			if (player == aiPlayer) {
-				var result = minimax(newBoard, huPlayer);
+				let result = minimax(newBoard, huPlayer);
 				move.score = result.score;
 			} else {
-				var result = minimax(newBoard, aiPlayer);
+				let result = minimax(newBoard, aiPlayer);
 				move.score = result.score;
 			}
 	
@@ -163,18 +196,18 @@ const ticTacToe = (() => {
 			moves.push(move);
 		}
 	
-		var bestMove;
+		let bestMove;
 		if(player === aiPlayer) {
-			var bestScore = -10000;
-			for(var i = 0; i < moves.length; i++) {
+			let bestScore = -10000;
+			for(let i = 0; i < moves.length; i++) {
 				if (moves[i].score > bestScore) {
 					bestScore = moves[i].score;
 					bestMove = i;
 				}
 			}
 		} else {
-			var bestScore = 10000;
-			for(var i = 0; i < moves.length; i++) {
+			let bestScore = 10000;
+			for(let i = 0; i < moves.length; i++) {
 				if (moves[i].score < bestScore) {
 					bestScore = moves[i].score;
 					bestMove = i;
@@ -186,6 +219,60 @@ const ticTacToe = (() => {
 	}
 
 
+	const noviceAi = (newBoard, player) => {
+		let availSpots = emptySquares();
+	
+		if (resultValidation.checkWin(newBoard, huPlayer)) {
+			return {score: -10};
+		} else if (resultValidation.checkWin(newBoard, aiPlayer)) {
+			return {score: 10};
+		} else if (availSpots.length === 0) {
+			return {score: 0};
+		}
+		let moves = [];
+		for (let i = 0; i < availSpots.length; i++) {
+			let move = {};
+			move.index = newBoard[availSpots[i]];
+			newBoard[availSpots[i]] = player;
+	
+			if (player == aiPlayer) {
+				let result = minimax(newBoard, huPlayer);
+				move.score = result.score;
+			} else {
+				let result = minimax(newBoard, aiPlayer);
+				move.score = result.score;
+			}
+	
+			newBoard[availSpots[i]] = move.index;
+	
+			moves.push(move);
+		}
+	
+		let bestMove;
+		if(player === aiPlayer) {
+			let bestScore = -10000;
+			for(let i = 0; i < moves.length; i++) {
+				if (moves[i].score > bestScore) {
+					bestScore = moves[i].score;
+					bestMove = i;
+				}
+			}
+		} else {
+			let bestScore = 10000;
+			for(let i = 0; i < moves.length; i++) {
+				if (moves[i].score < bestScore) {
+					bestScore = moves[i].score;
+					bestMove = i;
+				}
+			}
+		}
+	
+		return moves[bestMove];
+	}
+
+	
+
+
 
 
 	
@@ -195,6 +282,7 @@ const ticTacToe = (() => {
 	  cells,
 	  emptySquares,
 	  player2IsHuman,
+	  noviceAiDifficulty,
 	};
   })();
 
@@ -229,7 +317,7 @@ const resultValidation = (() => {
 			document.getElementById(index).style.backgroundColor =
 				gameWon.player == huPlayer ? "blue" : "red";
 		}
-		for (var i = 0; i < cells.length; i++) {
+		for (let i = 0; i < cells.length; i++) {
 			cells[i].removeEventListener('click', ticTacToe.turnClick, false);
 		}
 		declareWinner(gameWon.player == huPlayer ? "O won!" : "X Won!");
@@ -238,7 +326,7 @@ const resultValidation = (() => {
 
 	const checkTie = () => {
 		if (ticTacToe.emptySquares().length == 0) {
-			for (var i = 0; i < cells.length; i++) {
+			for (let i = 0; i < cells.length; i++) {
 				cells[i].style.backgroundColor = "green";
 				cells[i].removeEventListener('click', ticTacToe.turnClick, false);
 			}
