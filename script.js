@@ -223,9 +223,9 @@ const ticTacToe = (() => {
 		let availSpots = emptySquares();
 	
 		if (resultValidation.checkWin(newBoard, huPlayer)) {
-			return {score: -10};
+			return {score: -1};
 		} else if (resultValidation.checkWin(newBoard, aiPlayer)) {
-			return {score: 10};
+			return {score: 1};
 		} else if (availSpots.length === 0) {
 			return {score: 0};
 		}
@@ -236,10 +236,10 @@ const ticTacToe = (() => {
 			newBoard[availSpots[i]] = player;
 	
 			if (player == aiPlayer) {
-				let result = minimax(newBoard, huPlayer);
+				let result = noviceAi(newBoard, huPlayer);
 				move.score = result.score;
 			} else {
-				let result = minimax(newBoard, aiPlayer);
+				let result = noviceAi(newBoard, aiPlayer);
 				move.score = result.score;
 			}
 	
@@ -250,7 +250,7 @@ const ticTacToe = (() => {
 	
 		let bestMove;
 		if(player === aiPlayer) {
-			let bestScore = -10000;
+			let bestScore = -20;
 			for(let i = 0; i < moves.length; i++) {
 				if (moves[i].score > bestScore) {
 					bestScore = moves[i].score;
@@ -258,7 +258,7 @@ const ticTacToe = (() => {
 				}
 			}
 		} else {
-			let bestScore = 10000;
+			let bestScore = 20;
 			for(let i = 0; i < moves.length; i++) {
 				if (moves[i].score < bestScore) {
 					bestScore = moves[i].score;
