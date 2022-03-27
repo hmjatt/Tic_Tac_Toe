@@ -17,6 +17,8 @@ body {
 
 h1 {
     color: rgb(118, 228, 209);
+    font-size: 40px;
+    font-weight: 500;
 }
 
 #page1, #page2, #page3 {
@@ -78,6 +80,9 @@ h1 {
 	display: flex;
 }
 
+#turn-msg {
+    display: none;
+}
 
 
 
@@ -122,13 +127,13 @@ table tr td:last-child {
 .endgame {
   display: none;
   width: 200px;
-  top: 120px;
+  /* top: 120px; */
   background-color: rgba(205,133,63, 0.8);
-  position: absolute;
-  left: 50%;
-  margin-left: -100px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  /* position: absolute; */
+  /* left: 50%; */
+  /* margin-left: -100px; */
+  /* padding-top: 50px; */
+  /* padding-bottom: 50px; */
   text-align: center;
   border-radius: 5px;
   color: white;

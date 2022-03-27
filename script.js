@@ -6,7 +6,7 @@ const gameUI = (() => {
 	const letsPlay = document.getElementById('letsPlayBtn');
 	const page1 = document.getElementById('page1');
 	const page2 = document.getElementById('page2');
-	const page3 = document.getElementById('page3');
+	
 
 
 	
@@ -16,20 +16,25 @@ const gameUI = (() => {
 		page2.style.display = 'flex';
 		page3.style.display = 'none;'
 		ticTacToe.startGame();
+		// let gameWon = true;
+		// console.log(resultValidation.gameOver(gameWon));
 	}
 
-	// const letsPlayGame = () => {
-	// 	page1.style.display = 'none';
-	// 	page2.style.display = 'flex';
-	// 	page3.style.display = 'none;'
-	// 	ticTacToe.startGame();
-	// }
+
+
+	const replayGame = () => {
+		page1.style.display = 'flex';
+		page2.style.display = 'none';
+		page3.style.display = 'none;'
+		ticTacToe.startGame();
+	}
 
 	// letsPlay.addEventListener('click', letsPlayGame());
 
 
 	return {
 		letsPlayGame,
+		replayGame,
 	};
 })();
 
@@ -104,19 +109,19 @@ const ticTacToe = (() => {
 	const cells = document.querySelectorAll('.cell');
 	const turnMsg = document.getElementById('turn-msg');
 
-	const xMark = document.createElement('img');
-	const oMark = document.createElement('img');
+	// const xMark = document.createElement('img');
+	// const oMark = document.createElement('img');
 
-	xMark.src = '/images/svgs/X.svg';
-	oMark.src = '/images/svgs/O.svg';
-	console.log(xMark)
+	// xMark.src = '/images/svgs/X.svg';
+	// oMark.src = '/images/svgs/O.svg';
+	// console.log(xMark)
 
 	//make a reference to human player
 	let human = Object.assign({}, players, {human: 'O'});
 	let huPlayer = human.huPlayer();
 
 	let playingVsPlayer = false;
-	let masterDifficulty = false;
+	let masterDifficulty = true;
 	let blindDifficulty = false;
 
 
@@ -129,19 +134,26 @@ const ticTacToe = (() => {
 
 	const player2IsHuman = () => {
 		playingVsPlayer = true;
+		masterDifficulty = false;
+		turnMsg.style.display = 'flex';
 	}
 
 	const masterAiDifficulty = () => {
 		masterDifficulty = true;
+		
 	}
 
 	const blindAiDifficulty = () => {
 		blindDifficulty = true;
+		masterDifficulty = false;
+		
 	}
 
 	const startGame = () => {
 		document.querySelector(".endgame").style.display = "none";
-
+		page3.style.display = 'none';
+		// page2.style.display = 'none';
+		// page1.style.display = 'flex';
 		
 
 		origBoard = Array.from(Array(9).keys());
@@ -154,16 +166,7 @@ const ticTacToe = (() => {
 
 	}
 
-	// const turnClick =(square) => {
-	// 	// turn(square.target.id, huPlayer);
 
-	// 	if (typeof origBoard[square.target.id] == 'number') {
-			
-	// 		turn(square.target.id, huPlayer);
-	// 		if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) turn(bestSpot(), aiPlayer);	
-				
-	// 	}
-	// }
 
 	const turnClick =(square) => {
 		// turn(square.target.id, huPlayer);
@@ -183,6 +186,7 @@ const ticTacToe = (() => {
 				turn(square.target.id, huPlayer)
 				if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) {
 					if (blindDifficulty === false && masterDifficulty === true) {
+						
 						turn(bestSpot(), aiPlayer);
 					}else if (blindDifficulty === true) {
 						turn(blindSpot(), aiPlayer);
@@ -334,6 +338,7 @@ const resultValidation = (() => {
 			cells[i].removeEventListener('click', ticTacToe.turnClick, false);
 		}
 		declareWinner(gameWon.player == huPlayer ? "O won!" : "X Won!");
+
 	}
 
 
@@ -352,6 +357,10 @@ const resultValidation = (() => {
 	const declareWinner = (who) => {
 		document.querySelector(".endgame").style.display = "block";
 		document.querySelector(".endgame .text").innerText = who;
+		// console.log()
+		const page3 = document.getElementById('page3');
+		page3.style.display = 'flex';
+		page2.style.display = 'none';
 	}
 
 	return {

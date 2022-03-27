@@ -93,7 +93,7 @@
                     <div id="scoreboard">
                         <div class="X-O">
                             <img src="images/svgs/X.svg" id="X" alt="X">
-                            <p>-----</p>
+                            <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
                             <img src="images/svgs/O.svg" id="O" alt="O">
                         </div>
                     </div>
@@ -135,12 +135,10 @@
                 <div class="game-title">
                     <h1>Tic Tac Toe</h1>
                 </div>
-                <div class="winner">
-                    <h2 class="game-status-c">Player 1 Won</h2>
-                </div>
+               
                 <div class="endgame">
                     <div class="text"></div>
-                    <button onClick="ticTacToe.startGame()">Replay</button>
+                    <button onClick="gameUI.replayGame()">Replay</button>
                 </div>
 
             </div>
