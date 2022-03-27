@@ -67,6 +67,7 @@ const ticTacToe = (() => {
 
 	let playingVsPlayer = false;
 	let noviceDifficulty = false;
+	let blindDifficulty = false;
 
 
 
@@ -82,6 +83,10 @@ const ticTacToe = (() => {
 
 	const noviceAiDifficulty = () => {
 		noviceDifficulty = true;
+	}
+
+	const blindAiDifficulty = () => {
+		blindDifficulty = true;
 	}
 
 	const startGame = () => {
@@ -127,10 +132,10 @@ const ticTacToe = (() => {
 			}else if(playingVsPlayer === false){
 				turn(square.target.id, huPlayer)
 				if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) {
-					if (noviceDifficulty === false) {
+					if (blindDifficulty === false) {
 						turn(bestSpot(), aiPlayer);
-					}else if (noviceDifficulty === true) {
-						turn(noviceSpot(), aiPlayer);
+					}else if (blindDifficulty === true) {
+						turn(blindSpot(), aiPlayer);
 					}
 					
 				}
@@ -153,16 +158,13 @@ const ticTacToe = (() => {
 	}
 	
 	const bestSpot= () => {
-		// if (noviceDifficulty === true) {
-		// 	noviceAi(origBoard, aiPlayer).index;
-		// } else if(noviceDifficulty === false){
-			
-		// }
+		
 		return minimax(origBoard, aiPlayer).index;
 	}
 
-	const noviceSpot = () => {
-		return noviceAi(origBoard, aiPlayer).index;
+
+	const blindSpot = () => {
+		return blindAi();
 	}
 
 
@@ -219,56 +221,16 @@ const ticTacToe = (() => {
 	}
 
 
-	const noviceAi = (newBoard, player) => {
-		let availSpots = emptySquares();
 	
-		if (resultValidation.checkWin(newBoard, huPlayer)) {
-			return {score: -1};
-		} else if (resultValidation.checkWin(newBoard, aiPlayer)) {
-			return {score: 1};
-		} else if (availSpots.length === 0) {
-			return {score: 0};
-		}
-		let moves = [];
-		for (let i = 0; i < availSpots.length; i++) {
-			let move = {};
-			move.index = newBoard[availSpots[i]];
-			newBoard[availSpots[i]] = player;
+
+
+	const blindAi = () => {
+		
 	
-			if (player == aiPlayer) {
-				let result = noviceAi(newBoard, huPlayer);
-				move.score = result.score;
-			} else {
-				let result = noviceAi(newBoard, aiPlayer);
-				move.score = result.score;
-			}
-	
-			newBoard[availSpots[i]] = move.index;
-	
-			moves.push(move);
-		}
-	
-		let bestMove;
-		if(player === aiPlayer) {
-			let bestScore = -20;
-			for(let i = 0; i < moves.length; i++) {
-				if (moves[i].score > bestScore) {
-					bestScore = moves[i].score;
-					bestMove = i;
-				}
-			}
-		} else {
-			let bestScore = 20;
-			for(let i = 0; i < moves.length; i++) {
-				if (moves[i].score < bestScore) {
-					bestScore = moves[i].score;
-					bestMove = i;
-				}
-			}
-		}
-	
-		return moves[bestMove];
+		return emptySquares()[0];
 	}
+
+
 
 	
 
@@ -282,7 +244,7 @@ const ticTacToe = (() => {
 	  cells,
 	  emptySquares,
 	  player2IsHuman,
-	  noviceAiDifficulty,
+	  blindAiDifficulty,
 	};
   })();
 
