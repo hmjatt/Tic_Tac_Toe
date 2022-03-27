@@ -1,5 +1,49 @@
 
 
+// UI START
+const gameUI = (() => {
+
+	const letsPlay = document.getElementById('letsPlayBtn');
+	const page1 = document.getElementById('page1');
+	const page2 = document.getElementById('page2');
+	const page3 = document.getElementById('page3');
+
+
+	
+
+	const letsPlayGame = () => {
+		page1.style.display = 'none';
+		page2.style.display = 'flex';
+		page3.style.display = 'none;'
+		ticTacToe.startGame();
+	}
+
+	// const letsPlayGame = () => {
+	// 	page1.style.display = 'none';
+	// 	page2.style.display = 'flex';
+	// 	page3.style.display = 'none;'
+	// 	ticTacToe.startGame();
+	// }
+
+	// letsPlay.addEventListener('click', letsPlayGame());
+
+
+	return {
+		letsPlayGame,
+	};
+})();
+
+
+
+
+
+
+// UI END
+
+
+
+
+
 //create gameBoard using factory fxn & concatenative Inheritance/cloning
 const gameBoard = {
 
@@ -59,14 +103,20 @@ const ticTacToe = (() => {
 	
 	const cells = document.querySelectorAll('.cell');
 	const turnMsg = document.getElementById('turn-msg');
-	
+
+	const xMark = document.createElement('img');
+	const oMark = document.createElement('img');
+
+	xMark.src = '/images/svgs/X.svg';
+	oMark.src = '/images/svgs/O.svg';
+	console.log(xMark)
 
 	//make a reference to human player
 	let human = Object.assign({}, players, {human: 'O'});
 	let huPlayer = human.huPlayer();
 
 	let playingVsPlayer = false;
-	let noviceDifficulty = false;
+	let masterDifficulty = false;
 	let blindDifficulty = false;
 
 
@@ -81,8 +131,8 @@ const ticTacToe = (() => {
 		playingVsPlayer = true;
 	}
 
-	const noviceAiDifficulty = () => {
-		noviceDifficulty = true;
+	const masterAiDifficulty = () => {
+		masterDifficulty = true;
 	}
 
 	const blindAiDifficulty = () => {
@@ -100,7 +150,7 @@ const ticTacToe = (() => {
 			cells[i].style.removeProperty('background-color');
 			cells[i].addEventListener('click', turnClick, false);
 		}
-		console.log(typeof(origBoard), origBoard);
+		
 
 	}
 
@@ -132,7 +182,7 @@ const ticTacToe = (() => {
 			}else if(playingVsPlayer === false){
 				turn(square.target.id, huPlayer)
 				if (!resultValidation.checkWin(origBoard, huPlayer) && !resultValidation.checkTie()) {
-					if (blindDifficulty === false) {
+					if (blindDifficulty === false && masterDifficulty === true) {
 						turn(bestSpot(), aiPlayer);
 					}else if (blindDifficulty === true) {
 						turn(blindSpot(), aiPlayer);
@@ -245,6 +295,7 @@ const ticTacToe = (() => {
 	  emptySquares,
 	  player2IsHuman,
 	  blindAiDifficulty,
+	  masterAiDifficulty,
 	};
   })();
 

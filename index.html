@@ -13,33 +13,138 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        
 
-        <div class="player-div">
-            <button onClick="ticTacToe.player2IsHuman()">Player2</button>
-            <button onClick="ticTacToe.blindAiDifficulty()">Blind AI</button>
-            <p id="turn-msg">It's O's turn</p>
-        </div>
 
-        <table>
-            <tr>
-                <td class="cell" id="0"></td>
-                <td class="cell" id="1"></td>
-                <td class="cell" id="2"></td>
-            </tr>
-            <tr>
-                <td class="cell" id="3"></td>
-                <td class="cell" id="4"></td>
-                <td class="cell" id="5"></td>
-            </tr>
-            <tr>
-                <td class="cell" id="6"></td>
-                <td class="cell" id="7"></td>
-                <td class="cell" id="8"></td>
-            </tr>
-        </table>
-        <div class="endgame">
-            <div class="text"></div>
-            <button onClick="ticTacToe.startGame()">Replay</button>
+        <div class="container-div">
+
+            <div id="page1">
+                <div class="logo">
+                    <a href="https://github.com/hmjatt">
+                        <img src="images/id-logo.png" alt="github-logo">
+                    </a>
+                </div>
+                <div class="game-title">
+                    <h1>Tic Tac Toe</h1>
+                </div>
+                <div class="XO">
+                    <img src="images/svgs/X.svg" alt="X">
+                    <img src="images/svgs/O.svg" alt="O">
+                </div>
+                <div class="opponent">
+                    <h2>Choose your opponent</h2>
+                    <!-- <button id="ai">Ai</button> -->
+                    <button onClick="ticTacToe.blindAiDifficulty()">Blind AI</button>
+                    <button onClick="ticTacToe.masterAiDifficulty()">Master AI</button>
+                    <button id="friend" onClick="ticTacToe.player2IsHuman()">Friend</button>
+                </div>
+
+                <div class="lets-play">
+                    <button id="letsPlayBtn" onClick="gameUI.letsPlayGame()" >Let's Play!</button>
+                </div>
+                
+            </div>
+    
+    
+    
+            <!-- <div class="page2">
+                <div class="logo">
+                    <a href="https://github.com/hmjatt">
+                        <img src="images/id-logo.png" alt="github-logo">
+                    </a>
+                </div>
+                <div class="game-title">
+                    <h1>Tic Tac Toe</h1>
+                </div>
+                <div class="pick-side">
+                    <h2>Pick a side</h2>
+                </div>
+                <div class="X-O">
+                    <div class="x">
+                        <img src="images/svgs/X.svg" alt="X">
+                        <input type="radio" id="X" name="fav_language" value="x">
+                        <label for="X"></label>
+                    </div>
+                    <div class="o">
+                        <img src="images/svgs/O.svg" alt="O">
+                        <input type="radio" id="O" name="fav_language" value="o">
+                        <label for="O"></label>
+                    </div>
+                </div>
+                <div class="lets-play">
+                    <button id="letsPlayBtn">Ai</button>
+                </div>
+
+            </div> -->
+    
+    
+    
+            <div id="page2">
+                <div class="logo">
+                    <a href="https://github.com/hmjatt">
+                        <img src="images/id-logo.png" alt="github-logo">
+                    </a>
+                </div>
+                <div class="game-title">
+                    <h1>Tic Tac Toe</h1>
+                </div>
+                <div class="scoreboard-div">
+                    
+                    <div id="scoreboard">
+                        <div class="X-O">
+                            <img src="images/svgs/X.svg" id="X" alt="X">
+                            <p>-----</p>
+                            <img src="images/svgs/O.svg" id="O" alt="O">
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <table>
+                    <tr>
+                        <td class="cell" id="0"></td>
+                        <td class="cell" id="1"></td>
+                        <td class="cell" id="2"></td>
+                    </tr>
+                    <tr>
+                        <td class="cell" id="3"></td>
+                        <td class="cell" id="4"></td>
+                        <td class="cell" id="5"></td>
+                    </tr>
+                    <tr>
+                        <td class="cell" id="6"></td>
+                        <td class="cell" id="7"></td>
+                        <td class="cell" id="8"></td>
+                    </tr>
+                </table>
+          
+                <div class="result-div">
+                    <p id="turn-msg">It's O's turn</p>
+                </div>
+
+            </div>
+    
+    
+    
+            <div id="page3">
+                <div class="logo">
+                    <a href="https://github.com/hmjatt">
+                        <img src="images/id-logo.png" alt="github-logo">
+                    </a>
+                </div>
+                <div class="game-title">
+                    <h1>Tic Tac Toe</h1>
+                </div>
+                <div class="winner">
+                    <h2 class="game-status-c">Player 1 Won</h2>
+                </div>
+                <div class="endgame">
+                    <div class="text"></div>
+                    <button onClick="ticTacToe.startGame()">Replay</button>
+                </div>
+
+            </div>
+     
         </div>
         
 
