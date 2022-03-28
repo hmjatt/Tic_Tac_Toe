@@ -137,7 +137,7 @@ const ticTacToe = (() => {
 		origBoard = Array.from(Array(9).keys());
 		for (let i = 0; i < cells.length; i++) {
 			cells[i].innerText = '';
-			cells[i].style.backgroundImage = '';
+			cells[i].classList = 'cell';
 			cells[i].style.removeProperty('background-color');
 			cells[i].addEventListener('click', turnClick, false);
 		}
@@ -180,9 +180,9 @@ const ticTacToe = (() => {
 	const turn = (squareId, player) => {
 		origBoard[squareId] = player;
 		if(player === 'X') {
-			document.getElementById(squareId).style.backgroundImage = "url('https://hmjatt.github.io/Tic_Tac_Toe/images/svgs/X.svg')";
+			document.getElementById(squareId).classList = "cell-X";
 		} else if(player === 'O') {
-			document.getElementById(squareId).style.backgroundImage = "url('https://hmjatt.github.io/Tic_Tac_Toe/images/svgs/O.svg')";
+			document.getElementById(squareId).classList = "cell-O";
 		}
 
 		document.getElementById(squareId).innerText = player;

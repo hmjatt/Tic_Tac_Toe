@@ -152,8 +152,25 @@ table tr td:last-child {
     width: 50px;
     background-repeat: no-repeat;
     background-position: center;
+    
 }
 
+.cell-X {
+    background-image: url("/images/svgs/X.svg");
+    height: 150px;
+    width: 50px;
+    background-repeat: no-repeat;
+    color: #09094700;
+}
+
+
+.cell-O {
+    background-image: url("/images/svgs/O.svg");
+    height: 150px;
+    width: 50px;
+    color: #09094700;
+    background-repeat: no-repeat;
+}
 
 
 @media only screen and (max-device-width: 500px) {
