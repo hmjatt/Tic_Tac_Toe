@@ -1,6 +1,6 @@
 # Tic_Tac_Toe
 Tic Tac Toe game that you can play in your browser!!!
-It was created to get better at Factory Functions and Module Pattern. Keep on reading. Feel free to reach me at [Twitter](https://twitter.com/hmjatt/)
+It was created to get better at Factory Functions and Module Pattern. Feel free to reach me at [Twitter](https://twitter.com/hmjatt/)
 
 
 

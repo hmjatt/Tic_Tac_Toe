@@ -1,18 +1,17 @@
 /* Styles for Tic Tac Toe */
 html {
     font-family: 'Montserrat', sans-serif;
-    background-color: #485461;
-	background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+    background-color: #090947;
+    background-image: linear-gradient(315deg, #090947 0%, #5a585a 74%);
     color: rgb(229, 234, 241);
-    display: flex;
-    justify-content: center;
-    height: 100vh;
+    padding: 30px 0px 30px 0px;
 }
 
 body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
 }
 
 h1 {
@@ -41,7 +40,6 @@ h1 {
     align-self: center;
     width: 200px;
     height: 70px;
-    /* margin: 20px; */
     border-radius: 35px;
 	font-size: 16px;
     border: none;
@@ -56,7 +54,7 @@ h1 {
 }
 
 .opponent button:focus {
-    background-color: #28607a71;
+    background-color: #081b24c9;
     color: aliceblue;
 }
 
@@ -71,7 +69,7 @@ h1 {
     border-radius: 55px;
     border: none;
     box-shadow: 0 12px 18px -4px rgb(98, 130, 141);
-	background-color: rgb(118, 228, 209);
+	background-color: rgba(168, 250, 236, 0.815);
 	cursor: pointer;
 }
 
@@ -96,6 +94,11 @@ h1 {
     font-size: 30px;
 }
 
+/* #page3 */
+
+#page3 {
+    height: 100vh;
+}
 
 
 
@@ -103,22 +106,17 @@ h1 {
 
 td {
 	border:  5px solid rgb(247, 243, 228);
-	height:  100px;
-	width:  100px;
 	text-align:  center;
-	/* vertical-align:  middle; */
-	/* font-family:  "Comic Sans MS", cursive, sans-serif; */
-	font-size:  70px;
 	cursor: pointer;
 }
 
+
 table {
 	border-collapse: collapse;
-	/* position: absolute; */
-	/* left: 50%; */
-	/* margin-left: -155px; */
-	/* top: 50px; */
+	width: 500px;
 }
+
+
 
 table tr:first-child td {
 	border-top: 0;
@@ -140,13 +138,7 @@ table tr td:last-child {
   display: none;
   width: 300px;
   height: 200px;
-  /* top: 120px; */
   background-color: rgba(238, 189, 99, 0.952);
-  /* position: absolute; */
-  /* left: 50%; */
-  /* margin-left: -100px; */
-  /* padding-top: 50px; */
-  /* padding-bottom: 50px; */
   text-align: center;
   border-radius: 5px;
   color: rgba(31, 31, 31, 0.877);
@@ -154,7 +146,50 @@ table tr td:last-child {
   font-size: 40px;
 }
 
+.cell {
+    color: #28313b00;
+    height: 150px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
 
 
+@media only screen and (max-device-width: 500px) {
 
+    
+    #letsPlayBtn {
+        margin: 0px;
+    }
+
+    table {
+        width: 370px;
+    }
+
+    .cell {
+        height: 130px;
+        width: 80px;
+    }
+    
+
+    h1 {
+        font-size: 50px;
+        margin: 0px;
+    }
+
+    .XO img{
+        height: 100px;
+    }
+
+    .logo img {
+        height: 140px;
+    }
+
+}
+
+@media only screen and (min-device-height: 1200px) {
+    html {
+        height: 100vh;
+    }
+}

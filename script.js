@@ -1,26 +1,16 @@
-
-
 // UI START
 const gameUI = (() => {
 
-	// const letsPlay = document.getElementById('letsPlayBtn');
 	const page1 = document.getElementById('page1');
 	const page2 = document.getElementById('page2');
 	
-
-
-	
-
 	const letsPlayGame = () => {
+		
 		page1.style.display = 'none';
 		page2.style.display = 'flex';
 		page3.style.display = 'none;'
 		ticTacToe.startGame();
-		// let gameWon = true;
-		// console.log(resultValidation.gameOver(gameWon));
 	}
-
-
 
 	const replayGame = () => {
 		page1.style.display = 'flex';
@@ -29,26 +19,13 @@ const gameUI = (() => {
 		ticTacToe.startGame();
 	}
 
-	
-
-
-	// letsPlay.addEventListener('click', letsPlayGame());
-
-
 	return {
 		letsPlayGame,
 		replayGame,
 	};
 })();
 
-
-
-
-
-
 // UI END
-
-
 
 
 
@@ -112,12 +89,7 @@ const ticTacToe = (() => {
 	const cells = document.querySelectorAll('.cell');
 	const turnMsg = document.getElementById('turn-msg');
 
-	// const xMark = document.createElement('img');
-	// const oMark = document.createElement('img');
-
-	// xMark.src = '/images/svgs/X.svg';
-	// oMark.src = '/images/svgs/O.svg';
-	// console.log(xMark)
+	
 
 	//make a reference to human player
 	let human = Object.assign({}, players, {human: 'O'});
@@ -146,24 +118,26 @@ const ticTacToe = (() => {
 		masterDifficulty = true;
 		blindDifficulty = false;
 		playingVsPlayer = false;
+		turnMsg.style.display = 'none';
 	}
 
 	const blindAiDifficulty = () => {
 		blindDifficulty = true;
 		masterDifficulty = false;
 		playingVsPlayer = false;
+		turnMsg.style.display = 'none';
+
 	}
 
 	const startGame = () => {
 		document.querySelector(".endgame").style.display = "none";
 		page3.style.display = 'none';
-		// page2.style.display = 'none';
-		// page1.style.display = 'flex';
 		
 
 		origBoard = Array.from(Array(9).keys());
 		for (let i = 0; i < cells.length; i++) {
 			cells[i].innerText = '';
+			cells[i].style.backgroundImage = '';
 			cells[i].style.removeProperty('background-color');
 			cells[i].addEventListener('click', turnClick, false);
 		}
@@ -174,7 +148,7 @@ const ticTacToe = (() => {
 
 
 	const turnClick =(square) => {
-		// turn(square.target.id, huPlayer);
+		
 
 		if (typeof origBoard[square.target.id] == 'number') {
 			if(playingVsPlayer === true) {
@@ -205,6 +179,12 @@ const ticTacToe = (() => {
 
 	const turn = (squareId, player) => {
 		origBoard[squareId] = player;
+		if(player === 'X') {
+			document.getElementById(squareId).style.backgroundImage = "url('/images/svgs/X.svg')";
+		} else if(player === 'O') {
+			document.getElementById(squareId).style.backgroundImage = "url('/images/svgs/O.svg')";
+		}
+
 		document.getElementById(squareId).innerText = player;
 		let gameWon = resultValidation.checkWin(origBoard, player);
 		if (gameWon) resultValidation.gameOver(gameWon);
@@ -280,8 +260,6 @@ const ticTacToe = (() => {
 	}
 
 
-	
-
 
 	const blindAi = () => {
 		
@@ -291,12 +269,6 @@ const ticTacToe = (() => {
 
 
 
-	
-
-
-
-
-	
 	return {
 	  startGame,
 	  turnClick,
@@ -318,7 +290,6 @@ const resultValidation = (() => {
 	let huPlayer = human.huPlayer();
 
 	let winCombos = gameController.winCombos;
-	// console.log(typeof(winCombos), winCombos);
 	let cells = ticTacToe.cells;
 
 	const checkWin = (board, player) => {
@@ -362,7 +333,6 @@ const resultValidation = (() => {
 	const declareWinner = (who) => {
 		document.querySelector(".endgame").style.display = "block";
 		document.querySelector(".endgame .text").innerText = who;
-		// console.log()
 		const page3 = document.getElementById('page3');
 		page3.style.display = 'flex';
 		page2.style.display = 'none';
@@ -374,10 +344,3 @@ const resultValidation = (() => {
 		checkTie,
 	};
 })();
-
-
-
-
-  
-
-  document.onload = ticTacToe.startGame();
