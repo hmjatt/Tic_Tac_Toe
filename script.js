@@ -180,9 +180,9 @@ const ticTacToe = (() => {
 	const turn = (squareId, player) => {
 		origBoard[squareId] = player;
 		if(player === 'X') {
-			document.getElementById(squareId).style.backgroundImage = "url('https://github.com/hmjatt/Tic_Tac_Toe/blob/main/images/svgs/X.svg')";
+			document.getElementById(squareId).style.backgroundImage = "url('https://hmjatt.github.io/Tic_Tac_Toe/images/svgs/X.svg')";
 		} else if(player === 'O') {
-			document.getElementById(squareId).style.backgroundImage = "url('https://github.com/hmjatt/Tic_Tac_Toe/blob/main/images/svgs/O.svg')";
+			document.getElementById(squareId).style.backgroundImage = "url('https://hmjatt.github.io/Tic_Tac_Toe/images/svgs/O.svg')";
 		}
 
 		document.getElementById(squareId).innerText = player;
