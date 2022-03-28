@@ -156,7 +156,7 @@ table tr td:last-child {
 }
 
 .cell-X {
-    background-image: url("/images/svgs/X.svg");
+    background-image: url("https://hmjatt.github.io/Tic_Tac_Toe/images/svgs/X.svg");
     height: 150px;
     width: 50px;
     background-repeat: no-repeat;
@@ -165,7 +165,7 @@ table tr td:last-child {
 
 
 .cell-O {
-    background-image: url("/images/svgs/O.svg");
+    background-image: url("https://hmjatt.github.io/Tic_Tac_Toe/images/svgs/O.svg");
     height: 150px;
     width: 50px;
     color: #09094700;
