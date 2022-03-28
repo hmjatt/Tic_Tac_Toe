@@ -1,5 +1,5 @@
 # Tic_Tac_Toe
-Tic Tac Toe game that you can play in your browser!!!
+Tic Tac Toe game that you can play Vs Ai or Player in your browser!!!
 It was created to get better at Factory Functions and Module Pattern. Feel free to reach me at [Twitter](https://twitter.com/hmjatt/)
 
 
