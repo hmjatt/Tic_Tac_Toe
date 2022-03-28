@@ -3,7 +3,7 @@
 // UI START
 const gameUI = (() => {
 
-	const letsPlay = document.getElementById('letsPlayBtn');
+	// const letsPlay = document.getElementById('letsPlayBtn');
 	const page1 = document.getElementById('page1');
 	const page2 = document.getElementById('page2');
 	
@@ -28,6 +28,9 @@ const gameUI = (() => {
 		page3.style.display = 'none;'
 		ticTacToe.startGame();
 	}
+
+	
+
 
 	// letsPlay.addEventListener('click', letsPlayGame());
 
@@ -135,18 +138,20 @@ const ticTacToe = (() => {
 	const player2IsHuman = () => {
 		playingVsPlayer = true;
 		masterDifficulty = false;
+		blindDifficulty = false;
 		turnMsg.style.display = 'flex';
 	}
 
 	const masterAiDifficulty = () => {
 		masterDifficulty = true;
-		
+		blindDifficulty = false;
+		playingVsPlayer = false;
 	}
 
 	const blindAiDifficulty = () => {
 		blindDifficulty = true;
 		masterDifficulty = false;
-		
+		playingVsPlayer = false;
 	}
 
 	const startGame = () => {

@@ -17,8 +17,8 @@ body {
 
 h1 {
     color: rgb(118, 228, 209);
-    font-size: 40px;
-    font-weight: 500;
+    font-size: 60px;
+    font-weight: 600;
 }
 
 #page1, #page2, #page3 {
@@ -36,12 +36,12 @@ h1 {
     flex-direction: column;
 }
 
-.opponent button {
+.opponent button, .endgame button {
     font-family: 'Montserrat', sans-serif;
     align-self: center;
     width: 200px;
     height: 70px;
-    margin: 20px;
+    /* margin: 20px; */
     border-radius: 35px;
 	font-size: 16px;
     border: none;
@@ -49,6 +49,17 @@ h1 {
     box-shadow: 0 12px 18px -4px rgb(98, 130, 141);
 	cursor: pointer;
 }
+
+.opponent button {
+        margin: 20px;
+
+}
+
+.opponent button:focus {
+    background-color: #28607a71;
+    color: aliceblue;
+}
+
 
 #letsPlayBtn {
 	font-family: 'Montserrat', sans-serif;
@@ -82,6 +93,7 @@ h1 {
 
 #turn-msg {
     display: none;
+    font-size: 30px;
 }
 
 
@@ -126,9 +138,10 @@ table tr td:last-child {
 
 .endgame {
   display: none;
-  width: 200px;
+  width: 300px;
+  height: 200px;
   /* top: 120px; */
-  background-color: rgba(205,133,63, 0.8);
+  background-color: rgba(238, 189, 99, 0.952);
   /* position: absolute; */
   /* left: 50%; */
   /* margin-left: -100px; */
@@ -136,9 +149,12 @@ table tr td:last-child {
   /* padding-bottom: 50px; */
   text-align: center;
   border-radius: 5px;
-  color: white;
-  font-size: 2em;
+  color: rgba(31, 31, 31, 0.877);
+  font-weight: 500;
+  font-size: 40px;
 }
+
+
 
 
 
