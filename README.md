@@ -34,7 +34,7 @@ It was created to get better at Factory Functions and Module Pattern. Keep on re
 
 1. Add Medium Difficulty. 
 
-
+#### Quote
 
     People think that computer science is the art of geniuses 
     but the actual reality is the opposite, 
