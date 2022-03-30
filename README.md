@@ -1,4 +1,9 @@
 # Tic_Tac_Toe
+
+
+![This is an image](https://github.com/hmjatt/hmjatt.github.io/blob/master/images/page1.jpg)
+
+
 Tic Tac Toe game that you can play Vs Ai or Player in your browser!!!
 It was created to get better at Factory Functions and Module Pattern. Feel free to reach me at [Twitter](https://twitter.com/hmjatt/)
 
