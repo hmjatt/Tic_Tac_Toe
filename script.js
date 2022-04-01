@@ -84,7 +84,7 @@ const ticTacToe = (() => {
 	const getBoard = Object.assign({}, gameBoard, {board: [0, 1, 2, 3, 4, 5, 6, 7, 8]});
 	let origBoard = getBoard.origBoard();
 
-	// console.log(typeof(origBoard), origBoard);
+	
 	
 	const cells = document.querySelectorAll('.cell');
 	const turnMsg = document.getElementById('turn-msg');
